@@ -45,11 +45,11 @@ trait BuilderTrait
         $values[$this->model->getLatestVersionColumn()] = 1;
 
         // insert main table record
-        if (! $id = $this->query->insertGetId($values)) {
+        if (! $id = $this->query->insert($values)) {
             return false;
         }
 
-        $versionValues[$this->model->getVersionKeyName()] = $id;
+        $versionValues[$this->model->getVersionKeyName()] = $values[$this->model->getKeyName()];
         $versionValues[$this->model->getVersionColumn()] = 1;
 
         // insert version table record
