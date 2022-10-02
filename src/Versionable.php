@@ -2,6 +2,8 @@
 
 namespace ProAI\Versioning;
 
+use Illuminate\Support\Arr;
+
 trait Versionable
 {
     /**
@@ -24,7 +26,7 @@ trait Versionable
     public function newFromBuilder($attributes = array(), $connection = null)
     {
         // hide ref_id from model, because ref_id == id
-        $attributes = array_except((array) $attributes, $this->getVersionKeyName());
+        $attributes = Arr::except((array) $attributes, $this->getVersionKeyName());
 
         return parent::newFromBuilder($attributes, $connection);
     }
