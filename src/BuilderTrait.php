@@ -140,6 +140,7 @@ trait BuilderTrait
 
         // fill the latest version value
         $this->model->{$this->model->getLatestVersionColumn()} += 1;
+        $this->model->{$this->model->getVersionColumn()} = $this->model->{$this->model->getLatestVersionColumn()};
 
         return true;
     }
