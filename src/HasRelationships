@@ -1,10 +1,13 @@
+<?php
+
 namespace ProAI\Versioning;
 
 trait HasRelationships
 {
-    protected $relation = false;
-    
-    public function asRelation($joiningTable, $pivotField) {
+    public $relation = false;
+
+    public function asRelation($joiningTable, $pivotField)
+    {
         $this->relation = ['table' => $joiningTable, 'field' => $pivotField];
 
         return $this;
@@ -40,8 +43,9 @@ trait HasRelationships
 
 
         return $this->newBelongsToMany(
-            $instance->asRelation($table, Str::snake(class_basename($related)).'_version')->newQuery(), $this, $table, $foreignPivotKey,
+            $instance->asRelation($table, Str::snake(class_basename($related)) . '_version')->newQuery(), $this, $table, $foreignPivotKey,
             $relatedPivotKey, $parentKey ?: $this->getKeyName(),
             $relatedKey ?: $instance->getKeyName(), $relation
         );
     }
+}
